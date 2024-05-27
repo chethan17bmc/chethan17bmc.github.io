@@ -6,70 +6,119 @@
     <title>Wedding Invitation</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f8f9fa;
-            color: #343a40;
-            text-align: center;
+            font-family: 'Georgia', serif;
+            
+            color: #ffffff;
             margin: 0;
             padding: 0;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 20px;
         }
         h1 {
             font-size: 3em;
-            color: #6c757d;
+            margin-bottom: 10px;
         }
         h2 {
             font-size: 2em;
-            color: #343a40;
+            margin-bottom: 20px;
         }
         .details {
             font-size: 1.2em;
-            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        .countdown {
+            font-size: 1.5em;
+            margin: 20px 0;
         }
         .rsvp {
-            margin-top: 30px;
+            margin: 30px 0;
         }
         .rsvp a {
             text-decoration: none;
             color: #ffffff;
-            background-color: #007bff;
+            background-color: #ff69b4;
             padding: 10px 20px;
             border-radius: 5px;
             transition: background-color 0.3s ease;
         }
         .rsvp a:hover {
-            background-color: #0056b3;
+            background-color: #ff1493;
         }
         .footer {
             margin-top: 40px;
             font-size: 0.9em;
-            color: #6c757d;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>You're Invited!</h1>
-        <h2>The Wedding of</h2>
-        <h2>John Doe & Jane Smith</h2>
-        <div class="details">
-            <p>We are delighted to invite you to celebrate our marriage.</p>
-            <p><strong>Date:</strong> June 15, 2024</p>
-            <p><strong>Time:</strong> 4:00 PM</p>
-            <p><strong>Venue:</strong> The Grand Ballroom, 123 Wedding Lane, Love City</p>
-        </div>
-        <div class="rsvp">
-            <p>Please RSVP by June 1, 2024</p>
-            <a href="mailto:rsvp@example.com?subject=Wedding%20RSVP">RSVP Now</a>
-        </div>
-        <div class="footer">
-            <p>We look forward to celebrating with you!</p>
+    <div class="overlay">
+        <div class="container">
+            <h1>You're Invited!</h1>
+            <h2>The Wedding of</h2>
+            <h2>John Doe & Jane Smith</h2>
+            <div class="details">
+                <p>We are delighted to invite you to celebrate our marriage.</p>
+                <p><strong>Date:</strong> June 15, 2024</p>
+                <p><strong>Time:</strong> 4:00 PM</p>
+                <p><strong>Venue:</strong> The Grand Ballroom, 123 Wedding Lane, Love City</p>
+            </div>
+            <div class="countdown" id="countdown">
+                <!-- Countdown Timer will be inserted here -->
+            </div>
+            <div class="rsvp">
+                <p>Please RSVP by June 1, 2024</p>
+                <a href="mailto:rsvp@example.com?subject=Wedding%20RSVP">RSVP Now</a>
+            </div>
+            <div class="footer">
+                <p>We look forward to celebrating with you!</p>
+            </div>
         </div>
     </div>
+    <script>
+        // Countdown Timer
+        const countdownElement = document.getElementById('countdown');
+        const weddingDate = new Date('June 15, 2024 16:00:00').getTime();
+
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = `
+                <p><strong>Countdown to the big day:</strong></p>
+                <p>${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds</p>
+            `;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownElement.innerHTML = "<p>The wedding has started!</p>";
+            }
+        };
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>
-
