@@ -5,120 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Invitation</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap');
         body {
-            font-family: 'Georgia', serif;
-            
-            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffcc99, #ff9966);
+            text-align: center;
+            color: #8b0000;
             margin: 0;
             padding: 0;
-        }
-        .overlay {
-            background: rgba(0, 0, 0, 0.5);
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            overflow-x: hidden;
         }
         .container {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            max-width: 800px;
-            margin: 20px;
+            margin: 50px auto;
+            padding: 30px;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeIn 2s;
+            position: relative;
         }
         h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-        h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-        .details {
-            font-size: 1.2em;
-            margin-bottom: 30px;
+            font-size: 50px;
+            font-family: 'Great Vibes', cursive;
+            color: #b22222;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1.5s;
         }
         .countdown {
-            font-size: 1.5em;
+            font-size: 24px;
             margin: 20px 0;
+            font-weight: bold;
+            color: #d2691e;
         }
-        .rsvp {
-            margin: 30px 0;
+        .location {
+            margin-top: 20px;
         }
-        .rsvp a {
+        .location a {
+            display: inline-block;
+            padding: 15px 20px;
+            font-size: 18px;
+            color: white;
+            background: linear-gradient(45deg, #b22222, #ff4500);
+            border-radius: 10px;
             text-decoration: none;
-            color: #ffffff;
-            background-color: #ff69b4;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: 0.3s;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        .rsvp a:hover {
-            background-color: #ff1493;
+        .location a:hover {
+            background: linear-gradient(45deg, #8b0000, #cc5500);
         }
-        .footer {
-            margin-top: 40px;
-            font-size: 0.9em;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0px); opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="overlay">
-        <div class="container">
-            <h1>You're Invited!</h1>
-            <h2>The Wedding of</h2>
-            <h2>John Doe & Jane Smith</h2>
-            <div class="details">
-                <p>We are delighted to invite you to celebrate our marriage.</p>
-                <p><strong>Date:</strong> June 15, 2024</p>
-                <p><strong>Time:</strong> 4:00 PM</p>
-                <p><strong>Venue:</strong> The Grand Ballroom, 123 Wedding Lane, Love City</p>
-            </div>
-            <div class="countdown" id="countdown">
-                <!-- Countdown Timer will be inserted here -->
-            </div>
-            <div class="rsvp">
-                <p>Please RSVP by June 1, 2024</p>
-                <a href="mailto:rsvp@example.com?subject=Wedding%20RSVP">RSVP Now</a>
-            </div>
-            <div class="footer">
-                <p>We look forward to celebrating with you!</p>
-            </div>
+    <div class="container">
+        <h1>You're Invited to Our Wedding! 💍</h1>
+        <p>Join us in celebrating the union of <b>Rahul</b> & <b>Priya</b></p>
+        <p><b>Date:</b> 25th December 2025</p>
+        <p><b>Venue:</b> Grand Palace, Mumbai</p>
+        <div class="countdown" id="countdown"></div>
+        <div class="location">
+            <a href="https://maps.google.com?q=Grand+Palace,Mumbai" target="_blank">📍 View Location</a>
         </div>
     </div>
     <script>
-        // Countdown Timer
-        const countdownElement = document.getElementById('countdown');
-        const weddingDate = new Date('June 15, 2024 16:00:00').getTime();
-
-        const updateCountdown = () => {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            countdownElement.innerHTML = `
-                <p><strong>Countdown to the big day:</strong></p>
-                <p>${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds</p>
-            `;
-
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                countdownElement.innerHTML = "<p>The wedding has started!</p>";
-            }
-        };
-
-        const countdownInterval = setInterval(updateCountdown, 1000);
-        updateCountdown();
+        function countdownTimer() {
+            const weddingDate = new Date("December 25, 2025 00:00:00").getTime();
+            setInterval(function () {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerHTML = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
+        }
+        countdownTimer();
     </script>
 </body>
 </html>
